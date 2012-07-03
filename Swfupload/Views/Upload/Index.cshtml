@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Upload";
+}
+
+@section Head {
+    <script src="@Url.Content("~/Scripts/swfupload/swfupload.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/swfupload/plugins/swfupload.queue.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/Upload/upload.js")" type="text/javascript"></script>
+    <style type="text/css">
+        .swfupload { position:absolute; }
+        .swfupload-btn { font-size:9pt; }
+        #swfu-msg { margin-left:1em; padding:2px; }
+        .dlg-container { display:none; }
+        .dlg-content { margin:5px; }
+        .file-container { margin:3px 2px 2px 2px; border:1px solid #c5dbec; overflow:auto; }
+        .file-item { border:1px solid #c5dbec; background-color:#dfeffc; padding:0.5em; margin:2px; }
+        .file-item-name { margin:0 0 0 1em; }
+        .file-item-size { margin:0 0 0 1em; }
+        .file-item-msg { margin:0 0 0 1em; }
+        .file-item-progress { display:inline-block; margin:0 0 0 1em; height:5px; width:100px; }
+        .safari-test { border:1px solid #c5dbec; margin:10px 0 0 0; padding:3px; display:inline-block; }
+        .field-div { padding:2px 0 3px 5px; }
+        legend { font-family:Lucida Grande, Lucida Sans, Arial, sans-serif; color:#2e6e9e; }
+    </style>
+}
+
+<h2>Upload Photos</h2>
+<button id="dlgOpenBtn">Upload Photos</button>
+<div>
+    <form id="safari-form" method="post" enctype="multipart/form-data" action="@Url.Action("UploadFiles", "Upload")">
+        <fieldset class="safari-test">
+            <legend>Safari Test</legend>
+            <div class="field-div"><input name="fileUpload" type="file" multiple /></div>
+            <div class="field-div"><button id="safari-submit" type="submit">Submit</button></div>
+        </fieldset>
+    </form>
+</div>
+<div id="fileUploadDlg" class="dlg-container">
+    <form name="upload-form" enctype="multipart/form-data" method="post" action="@Url.Action("Upload", "Upload")">
+    <div id="dlg-flash-loading">Loading Flash Uploader...</div>
+    <div id="dlg-flash-failed">Flash Player may need to be installed or upgraded.</div>
+    <div class="dlg-content">
+        <span id="swfu_placeholder"></span>
+        <button id="btnUpload" type="button" class="swfupload-btn">Select Files</button><span id="swfu-msg"></span>
+        <div class="file-container"></div>
+    </div>
+    <input id="sessionId" name="sessionId" value="@Session.SessionID" type="hidden" />
+    </form>
+</div>

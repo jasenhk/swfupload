@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+@section Head
+{
+    <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1'}]}"></script>
+    <script type="text/javascript">
+//        google.load('visualization', '1.0', { 'packages': ['corechart'] });
+        google.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+//            var data = new google.visualization.DataTable();
+//            data.addColumn('string', 'Month');
+//            data.addColumn('number', 'Sales');
+//            data.addColumn({ type: 'number', role: 'annotation' });
+//            data.addRows([
+//                ['Jan', 3, 3],
+//                ['Feb', 1, 1],
+//                ['Mar', 2, 2],
+//                ['Apr', 5, 5]
+//            ]);
+
+//            var data = new google.visualization.arrayToDataTable([
+//                ["Month", "Directors", "Peons", "Morons"],
+//                ["J", 1, 2, 4],
+//                ["F", 2, 4, 16],
+//                ["M", 3, 6, 24],
+//                ["A", 4, 8, 36]
+//                ]);
+
+//            var options = {
+//                'title': 'Moron Growth',
+//                'pointSize': 3,
+//                'width': 600, 'height': 300
+//            };
+//            var chart = new google.visualization.LineChart($("#chart_div").get(0));
+            //            chart.draw(data, options);
+
+            var wrapper = new google.visualization.ChartWrapper({
+                chartType: 'LineChart',
+                dataTable: [['Month', 'Directors', 'Peons', 'Morons'], ['Jan', 1, 2, 3], ['Feb', 2, 4, 14], ['Mar', 3, 6, 33], ['Apr', 4, 8, 60]],
+                options: { 'title': 'Moron Growth', 'pointSize': 3, 'width': 600, 'height': 300 },
+                containerId: 'chart_div'
+            });
+            wrapper.draw();
+        }
+    </script>
+}
+
+<h2>Chart</h2>
+
+<div id="chart_div"></div>

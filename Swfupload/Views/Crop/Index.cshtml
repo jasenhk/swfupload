@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "Crop Photo";
+}
+
+@section Head
+{
+    <script src="@Url.Content("~/Scripts/Crop/crop.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jcrop/jquery.Jcrop.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/Content/jcrop/jquery.Jcrop.css")" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .img-container img
+        {
+    	    height: 200px;
+    	    width: 267px;
+        }
+        .img-controls
+        {
+    	    padding:5px;
+        }
+        .img-grid
+        {
+    	    border: 1px solid #ddd;
+    	    padding: 5px;
+    	    display: table-cell;
+        }
+        .img-container
+        {
+    	    border: 1px solid #ddd;
+    	    padding: 2px;
+    	    margin: 3px;
+    	    float: left;
+        }
+        .img-selected
+        {
+    	    border: 1px solid #fa0;
+        }
+        #img-canvas
+        {
+            border: 4px solid #ddd;
+        }
+        #dlg-container
+        {
+        }
+        .loading 
+        {
+        	background: url(@Url.Content("~/Content/images/ajax-loader_777.gif")) no-repeat center center;
+            min-height: 16px;
+            min-width: 16px;
+        }
+        #crop-box
+        {
+            border: 2px dashed #333;
+        }
+    </style>
+}
+
+<h2>Crop Photo</h2>
+
+<div>
+    <div class="img-grid">
+        <div class="img-container" data-index="0"><img id="img0" src="http://photos4.hawaiiinformation.com/WebPhotos/1/15/240415327.jpg" alt="240415327.jpg" data-width="533" data-height="400" /></div>
+        <div class="img-container" data-index="1"><img id="img1" src="http://photos4.hawaiiinformation.com/WebPhotos/1/15/240415328.jpg" alt="240415328.jpg" data-width="533" data-height="400" /></div>
+        <div class="img-container" data-index="2"><img id="img2" src="http://photos4.hawaiiinformation.com/WebPhotos/1/15/240415329.jpg" alt="240415329.jpg" data-width="533" data-height="400" /></div>
+    </div>
+    <div class="img-controls">
+        <p>Click a photo to select then press edit</p>
+        <button type="button" id="edit-btn">Edit</button>
+    </div>
+</div>
+
+<div id="dlg-container">
+    <div id="img-canvas"></div>
+</div>
