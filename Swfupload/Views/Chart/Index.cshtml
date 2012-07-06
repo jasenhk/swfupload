@@ -37,10 +37,42 @@
 //            var chart = new google.visualization.LineChart($("#chart_div").get(0));
             //            chart.draw(data, options);
 
+            var d = 0; // directors
+            var p = 0; // peons
+            var m = 0; // morons
+            var s = 0; // sycophants
+            var c = 0; // initiatives completed
+            var matrix = [];
+            for (d = 1; d < 25; d++) {
+                s = d + Math.floor(Math.pow(d, 1.5) / 2);
+                p = (2 * d) + s;
+                m = Math.ceil(Math.pow(d, 2) / s) + (p + s);
+                c = Math.floor(2 * (d + p + s/2 + m/4) - (m + 2*s) + Math.log(p));
+                matrix.push([d, s, p, m, c]);
+            }
+            var dt = new google.visualization.DataTable();
+            dt.addColumn("number", "Directors");
+            dt.addColumn("number", "Sycophants");
+            dt.addColumn("number", "Peons");
+            dt.addColumn("number", "Morons");
+            dt.addColumn("number", "Initiatives Completed");
+            for (i = 0; i < matrix.length; i++) {
+                dt.addRow(matrix[i]);
+            }
             var wrapper = new google.visualization.ChartWrapper({
-                chartType: 'LineChart',
-                dataTable: [['Month', 'Directors', 'Peons', 'Morons'], ['Jan', 1, 2, 3], ['Feb', 2, 4, 14], ['Mar', 3, 6, 33], ['Apr', 4, 8, 60]],
-                options: { 'title': 'Moron Growth', 'pointSize': 3, 'width': 600, 'height': 300 },
+                chartType: 'ComboChart',
+                dataTable: dt,
+                options: {
+                    title: 'Moronic Growth',
+                    fontSize: 10,
+                    seriesType: 'line',
+                    series: { 3: { type: "line", targetAxisIndex: 1} },
+                    hAxis: { title: "Directors" },
+                    vAxis: { gridlines: { count: 6} },
+                    vAxes: [{ title: "Staff", fontSize: 11 }, { title: "Initiatives"}],
+                    height: 350,
+                    width: 700
+                },
                 containerId: 'chart_div'
             });
             wrapper.draw();
